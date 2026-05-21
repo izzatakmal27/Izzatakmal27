@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFA Agrotech: Derivative Explorer - MD2 Pineapple Growth</title>
+    
+    <!-- Tailwind CSS for modern premium dashboard styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js for beautiful animated growth graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome for agricultural icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- KaTeX for gorgeous mathematical equations -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <!-- Custom Tailwind Configuration to match Malaysian Agrotech theme -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .math-block {
+            background: rgba(22, 163, 74, 0.03);
+            border-left: 4px solid #16a34a;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Navigation / Header -->
+    <header class="bg-primary-900 text-white shadow-lg border-b-4 border-amber-500 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="bg-amber-500 p-2.5 rounded-xl shadow-inner">
+                    <i class="fa-solid fa-seedling text-2xl text-primary-900 animate-bounce"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight">SFA: AGROTECHNOLOGY</h1>
+                    <p class="text-xs text-emerald-200 tracking-wider font-semibold">MALAYSIAN BIOSCIENCE DERIVATIVE APPLICATION</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 text-xs bg-primary-800 px-4 py-2 rounded-lg border border-primary-700">
+                <span class="inline-block w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></span>
+                <span class="font-medium text-emerald-100">Interactive Simulation Active</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left Panel: Context, Math, and Inputs (5 columns on desktop) -->
+        <section class="lg:col-span-5 flex flex-col gap-6">
+            
+            <!-- Real Bioscience Scenario Introduction Card -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 transition hover:shadow-md">
+                <div class="flex items-center space-x-2 mb-3">
+                    <span class="text-primary-700"><i class="fa-solid fa-graduation-cap text-xl"></i></span>
+                    <h2 class="text-lg font-bold text-slate-800">The Agrotech Problem</h2>
+                </div>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                    In Malaysia, the premium <strong>MD2 Pineapple (Ananas comosus)</strong> is a key agricultural export. For crop managers, understanding the exact <strong>Growth Rate</strong>—modeled mathematically via derivatives—is critical. 
+                    Rather than guessing, applying the first derivative \(f'(x)\) to the sigmoidal growth curve \(f(x)\) allows agronomists to target the <em>Inflection Point</em> (the moment of absolute maximum cellular expansion) to optimize fertilizer inputs (Potassium/Phosphorus) and predict ideal harvest weeks.
+                </p>
+                
+                <!-- Real Data Citations / Web Reference -->
+                <div class="bg-amber-50 rounded-xl p-3 border border-amber-200 text-xs text-amber-900 flex items-start space-x-2.5">
+                    <i class="fa-solid fa-book-open mt-0.5 text-amber-600"></i>
+                    <div>
+                        <span class="font-bold block">Malaysian Reference Context:</span>
+                        Growth profiles modeled based on standard agrotechnology crop cycles published by the 
+                        <a href="https://www.mardi.gov.my" target="_blank" class="underline hover:text-amber-700 font-semibold">Malaysian Agricultural Research & Development Institute (MARDI)</a> and the 
+                        <a href="https://www.mpib.gov.my" target="_blank" class="underline hover:text-amber-700 font-semibold">Malaysian Pineapple Industry Board (LPNM)</a>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Math and Formulas Card -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 transition hover:shadow-md">
+                <div class="flex items-center space-x-2 mb-4">
+                    <span class="text-primary-700"><i class="fa-solid fa-square-root-variable text-xl"></i></span>
+                    <h2 class="text-lg font-bold text-slate-800">Mathematical Formulation</h2>
+                </div>
+                
+                <p class="text-xs text-slate-500 mb-3">
+                    The physiological accumulation of MD2 pineapple fruit mass follows a classic 3-phase sigmoidal <strong>Logistic Growth Model</strong>:
+                </p>
+
+                <!-- Logistic Function -->
+                <div class="math-block p-4 rounded-xl mb-4">
+                    <div class="text-xs font-semibold text-primary-800 mb-1">Fruit Mass Function: \(f(x)\)</div>
+                    <div class="text-sm md:text-base font-bold my-1 text-slate-800">
+                        $$f(x) = \frac{L}{1 + e^{-k(x - x_0)}}$$
+                    </div>
+                    <div class="text-[11px] text-slate-500 mt-2 leading-relaxed">
+                        Where:<br>
+                        <strong>\(L\)</strong> = Carrying Capacity (Max potential mass in grams)<br>
+                        <strong>\(k\)</strong> = Growth speed coefficient<br>
+                        <strong>\(x_0\)</strong> = Mid-point week of development (Inflection point)<br>
+                        <strong>\(x\)</strong> = Time in weeks after forcing (flower induction)
+                    </div>
+                </div>
+
+                <!-- Derivative Function -->
+                <div class="math-block p-4 rounded-xl">
+                    <div class="text-xs font-semibold text-primary-800 mb-1">Growth Rate (Derivative): \(f'(x) = \frac{df}{dx}\)</div>
+                    <div class="text-sm md:text-base font-bold my-1 text-slate-800">
+                        $$f'(x) = \frac{L \cdot k \cdot e^{-k(x - x_0)}}{(1 + e^{-k(x - x_0)})^2}$$
+                    </div>
+                    <div class="text-[11px] text-slate-500 mt-2 leading-relaxed">
+                        This derivative represents the <strong>instantaneous growth rate</strong> in <span class="text-primary-700 font-bold">grams per week</span>. Finding the maximum of \(f'(x)\) points us to the precise transition from accelerating cell division to deceleration.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agronomic Variable Sliders -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 transition hover:shadow-md">
+                <div class="flex items-center space-x-2 mb-4">
+                    <span class="text-amber-500"><i class="fa-solid fa-sliders text-xl"></i></span>
+                    <h2 class="text-lg font-bold text-slate-800">Agronomic Scenarios</h2>
+                </div>
+                <p class="text-xs text-slate-500 mb-4 leading-relaxed">
+                    Adjust variables below to simulate Malaysian soil quality, organic fertilization rates, or irrigation shortages, and watch the derivatives dynamically adjust.
+                </p>
+
+                <!-- Slider 1: Carrying Capacity -->
+                <div class="mb-4">
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="text-slate-700">Max Mass \(L\) (g) <span class="text-[10px] text-slate-400 font-normal">(Soil Nutrient Limit)</span></span>
+                        <span id="labelL" class="text-primary-700">1800 g</span>
+                    </div>
+                    <input type="range" id="sliderL" min="1000" max="2500" step="50" value="1800" 
+                           class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary-600">
+                </div>
+
+                <!-- Slider 2: Growth Rate Coefficient -->
+                <div class="mb-4">
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="text-slate-700">Growth Index \(k\) <span class="text-[10px] text-slate-400 font-normal">(Fertilizer & Temp Impact)</span></span>
+                        <span id="labelK" class="text-primary-700">0.35</span>
+                    </div>
+                    <input type="range" id="sliderK" min="0.15" max="0.60" step="0.05" value="0.35" 
+                           class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary-600">
+                </div>
+
+                <!-- Slider 3: Peak Week -->
+                <div>
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="text-slate-700">Inflection Point \(x_0\) (Weeks) <span class="text-[10px] text-slate-400 font-normal">(Hormone Forcing Shift)</span></span>
+                        <span id="labelX0" class="text-primary-700">12 Weeks</span>
+                    </div>
+                    <input type="range" id="sliderX0" min="8" max="15" step="0.5" value="12" 
+                           class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary-600">
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Right Panel: Chart and Interactive Bioscience Analysis (7 columns on desktop) -->
+        <section class="lg:col-span-7 flex flex-col gap-6">
+
+            <!-- Chart Card -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 flex flex-col">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-4 mb-4 gap-2">
+                    <div>
+                        <h2 class="text-lg font-extrabold text-slate-800">Dynamic Physiological Growth Graph</h2>
+                        <p class="text-xs text-slate-500">Click anywhere inside the graph line points to probe the exact derivative</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-[11px] font-bold">
+                        <span class="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-md border border-emerald-200">
+                            Green: Mass \(f(x)\)
+                        </span>
+                        <span class="bg-amber-50 text-amber-700 px-2 py-1 rounded-md border border-amber-200">
+                            Orange: Derivative \(f'(x)\)
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Chart Wrapper with Responsive Aspect Ratio -->
+                <div class="relative w-full h-[320px] md:h-[400px]">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Interactive Analytics Display (Dynamic upon click) -->
+            <div id="interactivePanel" class="bg-gradient-to-br from-primary-900 to-primary-800 rounded-2xl shadow-lg border border-primary-950 p-6 text-white transition-all duration-300 transform">
+                <div class="flex items-center justify-between border-b border-primary-700/60 pb-4 mb-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-amber-400 text-lg"><i class="fa-solid fa-calculator"></i></span>
+                        <h3 class="font-bold text-base md:text-lg tracking-wide">Interactive Agronomic Probe</h3>
+                    </div>
+                    <span id="indicatorPulse" class="text-[10px] bg-amber-500 text-primary-950 font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                        Active Probe
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-center sm:text-left">
+                    <div class="bg-primary-800/50 p-3 rounded-xl border border-primary-700/40">
+                        <div class="text-[10px] uppercase text-emerald-300 font-bold tracking-wider">Time (Post-Forcing)</div>
+                        <div id="probeWeek" class="text-xl md:text-2xl font-black text-white mt-1">Week 12.0</div>
+                        <div id="probeStage" class="text-[10px] text-amber-400 font-semibold mt-0.5">Peak Acceleration</div>
+                    </div>
+                    <div class="bg-primary-800/50 p-3 rounded-xl border border-primary-700/40">
+                        <div class="text-[10px] uppercase text-emerald-300 font-bold tracking-wider">Estimated Mass \(f(x)\)</div>
+                        <div id="probeMass" class="text-xl md:text-2xl font-black text-white mt-1">900.0 g</div>
+                        <div class="text-[10px] text-emerald-200 mt-0.5">Accumulated Fresh Weight</div>
+                    </div>
+                    <div class="bg-primary-800/50 p-3 rounded-xl border border-primary-700/40">
+                        <div class="text-[10px] uppercase text-amber-300 font-bold tracking-wider">Growth Rate \(f'(x)\) <span class="text-amber-400 font-black">*</span></div>
+                        <div id="probeRate" class="text-xl md:text-2xl font-black text-amber-400 mt-1">157.5 g/wk</div>
+                        <div class="text-[10px] text-slate-200 mt-0.5">Instantaneous Derivative</div>
+                    </div>
+                </div>
+
+                <!-- Layman Explanation Section -->
+                <div class="bg-primary-950/40 rounded-xl p-4 border border-primary-700/30">
+                    <div class="text-xs font-bold text-amber-400 mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-info"></i> LAYMAN EXPLANATION & CROP ACTION
+                    </div>
+                    <p id="probeExplanation" class="text-xs md:text-sm text-emerald-50 leading-relaxed">
+                        At Week 12.0, the pineapple is at the direct inflection point. The fruit is growing at its highest biological speed of 157.5 grams per week. Ensure crop fertilization with Potassium-heavy blends (e.g., NPK 12:12:17-2) is complete, as moisture stress here permanently reduces ultimate harvested grade sizes.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-xs text-center mt-auto">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <p>&copy; 2026 SFA Agrotechnology Learning Modules. Actively designed for Malaysian agricultural science undergraduates.</p>
+            <div class="flex space-x-4">
+                <span class="hover:text-white cursor-help" title="Malaysian Agricultural Research and Development Institute">MARDI Standard compliant</span>
+                <span>&bull;</span>
+                <span class="hover:text-white cursor-help" title="Lembaga Perindustrian Nanas Malaysia">LPNM Grade Criteria</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let myChart = null;
+
+        // Mathematical Default Parameters
+        let L = 1800;    // carrying capacity (max mass in g)
+        let k = 0.35;    // growth speed coefficient
+        let x0 = 12;     // inflection week
+
+        // Generated Weeks array for pineapple post-forcing (week 4 to 22)
+        const startWeek = 4;
+        const endWeek = 22;
+        const step = 0.5;
+        let weeksData = [];
+
+        // Logistic function f(x)
+        function f(x) {
+            return L / (1 + Math.exp(-k * (x - x0)));
+        }
+
+        // First Derivative f'(x)
+        function f_prime(x) {
+            const expTerm = Math.exp(-k * (x - x0));
+            const numerator = L * k * expTerm;
+            const denominator = Math.pow(1 + expTerm, 2);
+            return numerator / denominator;
+        }
+
+        // Generate biological description based on derivative value & week
+        function getLaymanInterpretation(week, mass, rate) {
+            const peakWeek = parseFloat(x0);
+            
+            if (week < peakWeek - 4) {
+                return `<strong>Lag/Early Growth Phase (Week ${week}):</strong> At this stage, the derivative is relatively low (${rate.toFixed(1)} g/wk). Cells are mostly dividing internally within the fruit core. The pineapple looks tiny. Focus agronomic actions on keeping nitrogen high and managing pest control (e.g., ants/mealybugs) before fast filling begins.`;
+            } else if (week >= peakWeek - 4 && week < peakWeek - 0.5) {
+                return `<strong>Accelerating Phase (Week ${week}):</strong> The derivative is spiking up rapidly! The pineapple is absorbing nitrogen and potassium greedily. Cells are expanding massively. Your daily watering schedules are highly crucial now to support rapid weight gain.`;
+            } else if (week >= peakWeek - 0.5 && week <= peakWeek + 0.5) {
+                return `<strong>Inflection / Maximum Growth Stage (Week ${week}):</strong> This is the golden interval where the derivative \(f'(x)\) peaks at ${rate.toFixed(1)} g/wk! The plant is performing at its absolute peak biological metabolic rate. Soil moisture must be perfectly stable; drought now causes physical skin cracking on MD2 fruits.`;
+            } else if (week > peakWeek + 0.5 && week <= peakWeek + 4) {
+                return `<strong>Decelerating Phase (Week ${week}):</strong> The rate of change has begun to decrease (${rate.toFixed(1)} g/wk), even though the pineapple is still getting heavier. Cellular expansion is winding down. The starch is beginning to convert into simple sugars. Keep potassium high to boost the fruit's ultimate BRIX sweet index.`;
+            } else {
+                return `<strong>Maturity & Ripening Stage (Week ${week}):</strong> The derivative is near zero (${rate.toFixed(1)} g/wk), meaning the growth has flattened. The crop is physically mature. Golden-yellow skin transformation is beginning. Prepare harvesting labor, check export logistics, and reduce watering to prevent fruit core rot.`;
+            }
+        }
+
+        function getStageLabel(week) {
+            const peakWeek = parseFloat(x0);
+            if (week < peakWeek - 4) return "Lag Phase";
+            if (week < peakWeek - 0.5) return "Accelerating Growth";
+            if (week <= peakWeek + 0.5) return "Peak Inflection";
+            if (week <= peakWeek + 4) return "Deceleration";
+            return "Harvest Maturity";
+        }
+
+        function generateData() {
+            weeksData = [];
+            let massArray = [];
+            let rateArray = [];
+
+            for (let w = startWeek; w <= endWeek; w += step) {
+                weeksData.push(w.toFixed(1));
+                massArray.push(f(w).toFixed(1));
+                rateArray.push(f_prime(w).toFixed(1));
+            }
+            return { massArray, rateArray };
+        }
+
+        function updateProbeDisplay(weekVal) {
+            const w = parseFloat(weekVal);
+            const mass = f(w);
+            const rate = f_prime(w);
+
+            document.getElementById('probeWeek').innerHTML = `Week ${w.toFixed(1)}`;
+            document.getElementById('probeMass').innerHTML = `${mass.toFixed(1)} g`;
+            document.getElementById('probeRate').innerHTML = `${rate.toFixed(1)} g/wk`;
+            document.getElementById('probeStage').innerHTML = getStageLabel(w);
+            document.getElementById('probeExplanation').innerHTML = getLaymanInterpretation(w, mass, rate);
+
+            // Animate card highlight visually
+            const panel = document.getElementById('interactivePanel');
+            panel.classList.add('scale-[1.01]');
+            setTimeout(() => {
+                panel.classList.remove('scale-[1.01]');
+            }, 150);
+        }
+
+        function initChart() {
+            const { massArray, rateArray } = generateData();
+            const ctx = document.getElementById('growthChart').getContext('2d');
+
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: weeksData,
+                    datasets: [
+                        {
+                            label: 'Fruit Mass f(x) (grams)',
+                            data: massArray,
+                            borderColor: '#16a34a',
+                            backgroundColor: 'rgba(22, 163, 74, 0.05)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.3,
+                            yAxisID: 'yMass',
+                            pointRadius: 3,
+                            pointHoverRadius: 8,
+                            pointHoverBackgroundColor: '#14532d',
+                            pointHoverBorderColor: '#ffffff'
+                        },
+                        {
+                            label: "Growth Rate f'(x) (grams/week)",
+                            data: rateArray,
+                            borderColor: '#f59e0b',
+                            backgroundColor: 'transparent',
+                            borderWidth: 3.5,
+                            borderDash: [5, 5],
+                            tension: 0.3,
+                            yAxisID: 'yRate',
+                            pointRadius: 3,
+                            pointHoverRadius: 8,
+                            pointHoverBackgroundColor: '#d97706',
+                            pointHoverBorderColor: '#ffffff'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // Using custom top legends instead
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    onClick: (e) => {
+                        const points = myChart.getElementsAtEventForMode(e, 'index', { intersect: false }, true);
+                        if (points.length > 0) {
+                            const index = points[0].index;
+                            const weekVal = weeksData[index];
+                            updateProbeDisplay(weekVal);
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Time After Flower Induction (Weeks)',
+                                color: '#475569',
+                                font: {
+                                    weight: 'bold',
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                color: '#f1f5f9'
+                            }
+                        },
+                        yMass: {
+                            type: 'linear',
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Pineapple Fruit Mass (g)',
+                                color: '#16a34a',
+                                font: {
+                                    weight: 'bold',
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                color: '#f1f5f9'
+                            }
+                        },
+                        yRate: {
+                            type: 'linear',
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Growth Velocity df/dx (g/week)',
+                                color: '#d97706',
+                                font: {
+                                    weight: 'bold',
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                drawOnChartArea: false // prevent duplicate grid lines
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Listeners for Sliders
+        const sliderL = document.getElementById('sliderL');
+        const sliderK = document.getElementById('sliderK');
+        const sliderX0 = document.getElementById('sliderX0');
+
+        const labelL = document.getElementById('labelL');
+        const labelK = document.getElementById('labelK');
+        const labelX0 = document.getElementById('labelX0');
+
+        function updateChartData() {
+            L = parseFloat(sliderL.value);
+            k = parseFloat(sliderK.value);
+            x0 = parseFloat(sliderX0.value);
+
+            labelL.innerText = `${L} g`;
+            labelK.innerText = `${k}`;
+            labelX0.innerText = `${x0} Weeks`;
+
+            const { massArray, rateArray } = generateData();
+            myChart.data.datasets[0].data = massArray;
+            myChart.data.datasets[1].data = rateArray;
+            myChart.update();
+
+            // Auto-update probe default based on current x0 location (dynamic midpoint)
+            updateProbeDisplay(x0);
+        }
+
+        sliderL.addEventListener('input', updateChartData);
+        sliderK.addEventListener('input', updateChartData);
+        sliderX0.addEventListener('input', updateChartData);
+
+        // Run on Page Load
+        window.onload = function() {
+            initChart();
+            // Default select midpoint to show the absolute peak derivative initially
+            updateProbeDisplay(12.0);
+        };
+    </script>
+</body>
+</html>
